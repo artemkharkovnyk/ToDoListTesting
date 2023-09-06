@@ -1,6 +1,6 @@
 from pytest import fixture
 from framework.util.setup import driver_setup
-from framework.util.useractions import login
+from framework.util.useractions import login, logout
 from framework.logging import logger
 
 from secrets import PASSWORD, EMAIL
@@ -17,4 +17,5 @@ def setup():
 @fixture(scope='session', autouse=True)
 def teardown():
     logger.info('Suite teardown was started')
+    assert logout()
     logger.info('Suite teardown was ended')

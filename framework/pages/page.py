@@ -17,15 +17,17 @@ class Page:
     def get_current_url(self) -> str:
         return self.driver.current_url
 
-    def open_with_url(self, attempts=3, timeout=3) -> None:
+    def open_with_url(self, attempts=3, timeout=3, expected_url=None) -> None:
         if self.url is None:
             raise Exception('Page url was not set.')
+        if expected_url is None:
+            expected_url = self.url
         wait = WebDriverWait(self.driver, timeout=5)
         wait.until(expected_conditions.presence_of_element_located(('tag name', 'body')))
         self.driver.get(self.url)
         logger.info(f'driver opening url "{self.url}"')
         for attempt in range(1, attempts + 1):
-            if self.get_current_url() == self.url:
+            if self.get_current_url() == expected_url:
                 return
             sleep(timeout)
         raise Exception(f'Could not open {self.url}')
