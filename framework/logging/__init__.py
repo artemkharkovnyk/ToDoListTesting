@@ -1,0 +1,1 @@
+from .logger_config import tests_logger as logger
