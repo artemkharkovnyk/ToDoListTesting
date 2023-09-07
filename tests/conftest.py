@@ -16,6 +16,7 @@ def setup():
 
 @fixture(scope='session', autouse=True)
 def teardown():
+    yield
     logger.info('Suite teardown was started')
     assert logout()
     logger.info('Suite teardown was ended')

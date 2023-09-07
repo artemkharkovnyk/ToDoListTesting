@@ -1,5 +1,6 @@
 from selenium.webdriver.remote.webelement import WebElement
 from .menu import Menu
+from .settings import SettingsMenu
 from framework.logging import logger
 from framework.pages.page import Page
 
@@ -30,6 +31,8 @@ class MainPageMenu(Menu):
                 return True
         logger.error('Fail to logout user')
 
+    def open_settings_menu(self) -> SettingsMenu:
+        return SettingsMenu(button=self.settings_btn)
 
 
 
